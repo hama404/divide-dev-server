@@ -23,7 +23,7 @@ jobs:
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
-      APP_DATABASE_HOST: "localhost"
+      APP_DATABASE_HOST: "127.0.0.1"
       RAILS_ENV: test
     working_directory: ~/divide-dev-server
     steps:
@@ -32,10 +32,10 @@ jobs:
       - ruby/install-deps
       - run:
           name: Database setup
-          command: bundle exec rails db:migrate
+          command: rails db:migrate
       - run:
           name: test
-          command: bundle exec rake test
+          command: rspec
 
 workflows:
   version: 2
