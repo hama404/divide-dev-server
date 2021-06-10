@@ -11,8 +11,8 @@ jobs:
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
-          DB_USERNAME: "user"
-          DB_PASSWORD: "password"
+          MYSQL_USER: "user"
+          MYSQL_PASSWORD: "password"
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
