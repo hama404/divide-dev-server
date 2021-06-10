@@ -23,7 +23,7 @@ jobs:
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
-      APP_DATABASE_HOST: "127.0.0.1"
+      APP_DATABASE_HOST: "localhost"
       RAILS_ENV: test
     working_directory: ~/divide-dev-server
     steps:
