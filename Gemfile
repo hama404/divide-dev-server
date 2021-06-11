@@ -32,6 +32,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', :platforms => [:mri, :mingw, :x64_mingw]
 
+  # rspec
   gem 'rspec-rails', '~> 4.1.0'
   gem 'spring-commands-rspec'
 end
@@ -42,6 +43,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
+  # rubocop
   gem 'rubocop', :require => false
   gem 'rubocop-rails'
 end
