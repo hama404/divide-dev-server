@@ -6,9 +6,8 @@
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
-server '18.179.13.4', user: 'hamasaki', roles: %w{app db web}
 
-set :ssh_options, auth_methods: ['publickey'], keys: ['/root/.ssh/test-keypair.pem'] 
+
 
 # role-based syntax
 # ==================

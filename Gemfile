@@ -46,11 +46,7 @@ group :development do
   # rubocop
   gem 'rubocop', :require => false
   gem 'rubocop-rails'
-
-  # capistrano
-  gem 'capistrano'
 end
-
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', :platforms => [:mingw, :mswin, :x64_mingw, :jruby]
@@ -61,3 +57,16 @@ gem 'dotenv-rails'
 # devise authentication
 gem 'devise', '4.7.3'
 gem 'devise_token_auth'
+
+# install capistrano
+platforms :ruby do
+  gem 'unicorn'
+end
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
+end

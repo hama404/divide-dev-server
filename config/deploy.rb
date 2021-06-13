@@ -4,41 +4,36 @@ lock "~> 3.16.0"
 set :application, "divide-dev-server"
 set :repo_url, "git@github.com:hama404/divide-dev-server.git"
 set :branch, ENV['BRANCH'] || "release"
-set :deploy_to, "/home/ec2-user/src/divide-dev-server"
 
-set :ssh_options, auth_methods: ['publickey'],
-                  keys: ['/root/.ssh/test-keypair.pem'] 
+set :rbenv_type, :user
+set :rbenv_ruby, '2.5.1'
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+set :rbenv_roles, :all
 
-# Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :log_level, :warn
 
-# Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, "/var/www/my_app_name"
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/credentials.yml.enc')
 
-# Default value for :format is :airbrussh.
-# set :format, :airbrussh
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
-# You can configure the Airbrussh format using :format_options.
-# These are the defaults.
-# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
+set :keep_releases, 3
 
-# Default value for :pty is false
-# set :pty, true
+set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
 
-# Default value for :linked_files is []
-# append :linked_files, "config/database.yml"
+set :unicorn_config_path, -> { File.join(current_path, "config", "unicorn.rb") }
 
-# Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+namespace :deploy do
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
 
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+    end
+  end
+end
 
-# Default value for local_user is ENV['USER']
-# set :local_user, -> { `git config user.name`.chomp }
-
-# Default value for keep_releases is 5
-# set :keep_releases, 5
-
-# Uncomment the following to require manually verifying the host key before first deploy.
-# set :ssh_options, verify_host_key: :secure
+after 'deploy:publishing', 'deploy:restart'
+namespace :deploy do
+  task :restart do
+    invoke 'unicorn:restart'
+  end
+end
