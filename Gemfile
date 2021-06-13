@@ -46,6 +46,9 @@ group :development do
   # rubocop
   gem 'rubocop', :require => false
   gem 'rubocop-rails'
+
+  # capistrano
+  gem 'capistrano'
 end
 
 
