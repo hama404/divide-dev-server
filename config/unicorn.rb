@@ -4,7 +4,7 @@ RAILS_ENV  = ENV['RAILS_ENV'] || 'development'
 
 worker_processes 3
 
-listen '/tmp/unicorn.sock'
+listen '/var/www/divide-dev-server/current/tmp/sockets/unicorn.sock'
 pid 'tmp/pids/unicorn.pid'
 
 preload_app true
@@ -12,7 +12,6 @@ preload_app true
 timeout 60
 working_directory APP_PATH
 
-# logのpath
 stderr_path "#{RAILS_ROOT}/log/unicorn_error.log"
 stdout_path "#{RAILS_ROOT}/log/unicorn_access.log"
 

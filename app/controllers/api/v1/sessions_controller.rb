@@ -3,7 +3,7 @@ class Api::V1::SessionsController < ApplicationController
     user = {
       admin: 'anpanman',
       password: 'hogehoge',
-      message: 'i am hero'
+      message: 'i am super hero'
     }
     render json: user
   end
