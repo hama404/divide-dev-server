@@ -1,24 +1,7 @@
-# README
+# TEST App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+このアプリでは、  
+- docker-compose (rails & puma, nginx, mysql) での開発環境の構築
+- circleci (rspec, rubocop) の導入
+- capystrano によるデプロイ (aws ec2, s3, rds)
+の環境を構築しています。
